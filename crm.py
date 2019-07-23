@@ -76,14 +76,23 @@ class CRM:
         delete_contact.delete_instance()
   #
     def display_all_contacts(self):
-        Contact.all()
+        for contact in Contact.select():
+            print(contact.first_name, contact.last_name, contact.email, contact.note)
 
     def search_by_attribute(self):
         print('Please select which attribute you want to search by: ')
         attribute_to_search = input()
         print('Please enter the value you want to search by: ')
         value_to_search = input()
-        print(Contact.find_by(attribute_to_search, value_to_search))
+        if attribute_to_search == 'first_name':
+            searched_contact = Contact.get(Contact.first_name == value_to_search)
+        elif attribute_to_search == 'last_name':
+            searched_contact = Contact.get(Contact.last_name == value_to_search)
+        elif attribute_to_search == 'email':
+            searched_contact = Contact.get(Contact.email == value_to_search)
+        elif attribute_to_search == 'note':
+            searched_contact = Contact.get(Contact.note == value_to_search) 
+        print(searched_contact)
 
 a_crm_app = CRM()
 a_crm_app.main_menu()
