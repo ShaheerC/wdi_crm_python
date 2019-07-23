@@ -3,9 +3,9 @@ class Contact:
     contacts = []
     next_id = 1
 
-    def __init__(self, first, last, email, note):
-        self.first = first
-        self.last = last
+    def __init__(self, first_name, last_name, email, note):
+        self.first_name = first_name
+        self.last_name = last_name
         self.email = email
         self.note = note
         self.id = Contact.next_id
@@ -13,12 +13,11 @@ class Contact:
         """This method should initialize the contact's attributes"""
 
     def __str__(self):
-        return"CONTACT: first:{} - last:{} - email:{} - note:{}".format(self.first, self.last, self.email, self.note)
-
+        return"CONTACT: first_name:{} - last_name:{} - email:{} - note:{}".format(self.first_name, self.last_name, self.email, self.note)
 
     @classmethod
-    def create(cls, first, last, email, note):
-        person = Contact(first, last, email, note)
+    def create(cls, first_name, last_name, email, note):
+        person = Contact(first_name, last_name, email, note)
         cls.contacts.append(person)
         return person
         """This method should call the initializer,
@@ -35,17 +34,19 @@ class Contact:
     def find(cls, ident):
         for contact in Contact.contacts:
             if ident == contact.id:
-                return contact.full_name()
+                return contact
+            else:
+                return False
 
         """ This method should accept an id as an argument
         and return the contact who has that id
         """
 
     def update(self, attribute_update, value_update):
-        if attribute_update == 'first':
-            self.first = value_update
-        elif attribute_update == 'last':
-            self.last = value_update
+        if attribute_update == 'first_name':
+            self.first_name = value_update
+        elif attribute_update == 'last_name':
+            self.last_name = value_update
         elif attribute_update == 'email':
             self.email == value_update
         elif attribute_update == 'note':
@@ -61,9 +62,9 @@ class Contact:
     @classmethod
     def find_by(cls, attribute, value):
         for contact in Contact.contacts:
-            if attribute == 'first' and value == contact.first:
+            if attribute == 'first_name' and value == contact.first_name:
                 return contact
-            if attribute == 'last' and value == contact.last:
+            if attribute == 'last_name' and value == contact.last_name:
                 return contact
             if attribute == 'email' and value == contact.email:
                 return contact
@@ -82,7 +83,7 @@ class Contact:
 
 
     def full_name(self):
-        name_full = self.first + ' ' + self.last
+        name_full = self.first_name + ' ' + self.last_name
         return name_full
         """Returns the full (first and last) name of the contact"""
 
@@ -95,40 +96,40 @@ class Contact:
 
     # Feel free to add other methods here, if you need them.
 
-bob = Contact.create('Bob', 'Bobb', 'bob@bob.bob', 'bob bobbing in the bob')
-billy = Contact.create('Billy', 'Billee', 'billy@billy.billy', 'billy billying in the billy')
+# bob = Contact.create('Bob', 'Bobb', 'bob@bob.bob', 'bob bobbing in the bob')
+# billy = Contact.create('Billy', 'Billee', 'billy@billy.billy', 'billy billying in the billy')
 
-print(bob.first)
-print(bob.last)
-print(bob.email)
-print(bob.note)
-print(billy.first)
-print(billy.last)
-print(billy.email)
-print(billy.note)
+# print(bob.first)
+# print(bob.last)
+# print(bob.email)
+# print(bob.note)
+# print(billy.first)
+# print(billy.last)
+# print(billy.email)
+# print(billy.note)
 
-print(len(Contact.contacts))
-print(bob.id)
-print(billy.id)
+# print(len(Contact.contacts))
+# print(bob.id)
+# print(billy.id)
 
-print(billy.full_name())
+# print(billy.full_name())
 
-print(Contact.find(1))
+# print(Contact.find(1))
 
-Contact.all()
+# Contact.all()
 
-bob.delete()
+# bob.delete()
 
-Contact.all()
+# Contact.all()
 
-billy.update('first', 'john')
+# billy.update('first', 'john')
 
-Contact.all()
+# Contact.all()
 
-print("Find John")
-print(Contact.find_by("first", "john"))
-print(Contact.find_by("email", "billy@billy.billy"))
+# print("Find John")
+# print(Contact.find_by("first", "john"))
+# print(Contact.find_by("email", "billy@billy.billy"))
 
-Contact.delete_all()
+# Contact.delete_all()
 
-Contact.all()
+# Contact.all()
