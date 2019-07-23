@@ -41,12 +41,17 @@ class CRM:
         email = input()
         print('Enter a Note: ')
         note = input()
-        Contact.create(first_name, last_name, email, note)
+        contact = Contact.create(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            note=note
+            )
   #
     def modify_existing_contact(self):
         print('Please enter Contact ID to be modified: ')
         identity = int(input())
-        contact_to_mod = Contact.find(identity)
+        contact_to_mod = Contact.get(id=identity)
         print('For this contact which attribute would you like to modify: ')
         attribute_to_modify = input()
         print('For this attribute what is the value of the modification: ')
@@ -56,7 +61,7 @@ class CRM:
     def delete_contact(self):
         print('Please enter Contact ID to be deleted: ')
         ident_contact = int(input())
-        delete_contact = Contact.find(ident_contact)
+        delete_contact = Contact.get(id=ident_contact)
         delete_contact.delete()
   #
     def display_all_contacts(self):
