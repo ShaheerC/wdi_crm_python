@@ -56,13 +56,24 @@ class CRM:
         attribute_to_modify = input()
         print('For this attribute what is the value of the modification: ')
         value_of_mod = input()
-        contact_to_mod.update(attribute_to_modify, value_of_mod)
+        if attribute_to_modify == 'first_name':
+            contact_to_mod.first_name = value_of_mod
+            contact_to_mod.save()
+        elif attribute_to_modify == 'last_name':
+            contact_to_mod.last_name = value_of_mod
+            contact_to_mod.save()
+        elif attribute_to_modify == 'email':
+            contact_to_mod.email = value_of_mod
+            contact_to_mod.save()
+        elif attribute_to_modify == 'note':
+            contact_to_mod.note = value_of_mod
+            contact_to_mod.save()            
   #
     def delete_contact(self):
         print('Please enter Contact ID to be deleted: ')
         ident_contact = int(input())
         delete_contact = Contact.get(id=ident_contact)
-        delete_contact.delete()
+        delete_contact.delete_instance()
   #
     def display_all_contacts(self):
         Contact.all()
